@@ -1,0 +1,14 @@
+{
+  "summary": "Context Compaction과 RAG 검색을 설명하는 문서입니다.",
+  "concepts": [
+    {
+      "name": "Context Compaction",
+      "definition": "긴 입력에서 핵심 정보만 보존하는 과정",
+      "summary": "요구사항, 제약조건, 성공 기준을 보존합니다.",
+      "links": ["RAG Retrieval"],
+      "sources": ["demo.md"],
+      "practical_use": "Agent-ready context 생성"
+    }
+  ],
+  "entities": []
+}
