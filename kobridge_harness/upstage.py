@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any
 
 import httpx
+from dotenv import load_dotenv
 
 from .models import ParsedDocument
 
@@ -26,16 +27,17 @@ class UpstageClient:
         model: str | None = None,
         timeout: float = 60.0,
     ) -> None:
+        load_dotenv(dotenv_path=Path.cwd() / ".env")
         self.api_key = api_key or os.getenv("UPSTAGE_API_KEY")
         self.fixture_dir = Path(fixture_dir)
         self.mock = os.getenv("KOBRIDGE_MOCK", "").casefold() == "true"
         self.chat_url = chat_url or os.getenv(
-            "UPSTAGE_CHAT_URL", "https://api.upstage.ai/v1/solar/chat/completions"
+            "UPSTAGE_CHAT_URL", "https://api.upstage.ai/v1/chat/completions"
         )
         self.parse_url = parse_url or os.getenv(
             "UPSTAGE_DOCUMENT_PARSE_URL", "https://api.upstage.ai/v1/document-ai/document-parse"
         )
-        self.model = model or os.getenv("UPSTAGE_SOLAR_MODEL", "solar-pro-3")
+        self.model = model or os.getenv("UPSTAGE_SOLAR_MODEL", "solar-pro3")
         self.timeout = timeout
 
     def parse_document(self, file_path: Path | str, mode: str = "standard") -> ParsedDocument:
